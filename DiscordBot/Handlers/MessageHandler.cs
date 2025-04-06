@@ -1,7 +1,6 @@
-﻿using Discord.WebSocket;
+﻿using DiscordBot.Discord.MessageContext;
+using Discord.WebSocket;
 using DiscordBot.Core;
-using DiscordBot.Core.Text;
-using DiscordBot.Discord.MessageContext;
 
 
 namespace DiscordBot.Host.Handlers

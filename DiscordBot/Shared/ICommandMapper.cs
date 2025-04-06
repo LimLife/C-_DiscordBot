@@ -4,6 +4,6 @@ namespace DiscordBot.Core
 {
     public interface ICommandMapper
     {
-        ITextCommand? GetServiceForCommand(string command);
+        IServiceText? GetServiceForCommand(string command);
     }
 }

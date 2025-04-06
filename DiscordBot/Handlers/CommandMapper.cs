@@ -1,13 +1,12 @@
 ﻿using DiscordBot.Core;
-using DiscordBot.Core.Text;
 
 namespace DiscordBot.Host.Handlers
 {
     public class CommandMapper: ICommandMapper
     {
-        private readonly Dictionary<string, ITextCommand> _commandToServiceMap;
+        private readonly Dictionary<string, IServiceText> _commandToServiceMap;
 
-        public CommandMapper(IEnumerable<ITextCommand> services)
+        public CommandMapper(IEnumerable<IServiceText> services)
         {
             _commandToServiceMap = services
                 .SelectMany(service => service.GetSupportedCommands()
@@ -15,6 +14,6 @@ namespace DiscordBot.Host.Handlers
                 .ToDictionary(x => x.cmd, x => x.service);
         }
 
-        public ITextCommand? GetServiceForCommand(string command) => _commandToServiceMap.GetValueOrDefault(command);
+        public IServiceText? GetServiceForCommand(string command) => _commandToServiceMap.GetValueOrDefault(command);
     }
 }

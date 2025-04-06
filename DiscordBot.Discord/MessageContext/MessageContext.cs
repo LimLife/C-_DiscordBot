@@ -1,5 +1,4 @@
-﻿
-using Discord.WebSocket;
+﻿using Discord.WebSocket;
 using DiscordBot.Core.Text;
 
 namespace DiscordBot.Discord.MessageContext
