@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscordBot.Host", "DiscordBot.Host.csproj", "{5F3B58ED-7A35-402F-8783-3BBDFB5A30B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscordBot.Text", "..\DiscrodBot.Modules.Text\DiscordBot.Text.csproj", "{3D95A82A-C196-4D59-AF6E-DE5CDABBEF17}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscordBot.Core", "..\DiscordBot.Core\DiscordBot.Core.csproj", "{D4539194-220F-47D0-B828-69691BA14411}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscordBot.Discord", "..\DiscordBot.Discord\DiscordBot.Discord.csproj", "{797C2B05-B352-444A-9C8A-F6329421E58C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5F3B58ED-7A35-402F-8783-3BBDFB5A30B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F3B58ED-7A35-402F-8783-3BBDFB5A30B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F3B58ED-7A35-402F-8783-3BBDFB5A30B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F3B58ED-7A35-402F-8783-3BBDFB5A30B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D95A82A-C196-4D59-AF6E-DE5CDABBEF17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D95A82A-C196-4D59-AF6E-DE5CDABBEF17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D95A82A-C196-4D59-AF6E-DE5CDABBEF17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D95A82A-C196-4D59-AF6E-DE5CDABBEF17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4539194-220F-47D0-B828-69691BA14411}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4539194-220F-47D0-B828-69691BA14411}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4539194-220F-47D0-B828-69691BA14411}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4539194-220F-47D0-B828-69691BA14411}.Release|Any CPU.Build.0 = Release|Any CPU
+		{797C2B05-B352-444A-9C8A-F6329421E58C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{797C2B05-B352-444A-9C8A-F6329421E58C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{797C2B05-B352-444A-9C8A-F6329421E58C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{797C2B05-B352-444A-9C8A-F6329421E58C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B3973295-7936-4F8E-A886-A02CFAC4984E}
+	EndGlobalSection
+EndGlobal
