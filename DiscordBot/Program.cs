@@ -4,6 +4,7 @@ using DiscordBot.Text.Extensions;
 using DiscordBot.Host.Handlers;
 using DiscordBot.Host.Service;
 using DiscordBot.Host.Config;
+using DiscordBot.NetworkKit;
 using DiscordBot.Core;
 using DotNetEnv;
 using Discord;
@@ -14,8 +15,7 @@ var builder = new HostApplicationBuilder(args);
 
 builder.Services.AddSingleton(new BotConfig
 {
-    Token = Env.GetString("DISCORD_TOKEN") ??
-            throw new ArgumentNullException("DISCORD_TOKEN is not configured"),
+    Token = Env.GetString("DISCORD_TOKEN") ?? throw new ArgumentNullException("DISCORD_TOKEN is not configured"),
     Intents = GatewayIntents.Guilds | GatewayIntents.GuildMessages | GatewayIntents.MessageContent,
     LogLevel = LogSeverity.Debug
 });
@@ -25,8 +25,8 @@ builder.Services.AddSingleton<MessageHandler>();
 builder.Services.AddSingleton<DiscordBotService>();
 builder.Services.AddSingleton<LogHandler>();
 builder.Services.AddHostedService<DiscordBotService>();
-
-builder.Services.AddDiscordCommandHandlers();
+builder.Services.AddDiscordTextCommandHandlers();
+builder.Services.AddDotaRestClient();
 
 var app = builder.Build();
 await app.RunAsync();
