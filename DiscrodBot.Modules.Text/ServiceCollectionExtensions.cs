@@ -1,17 +1,17 @@
-﻿using DiscordBot.Core;
-using DiscordBot.Core.Text;
+﻿using Microsoft.Extensions.DependencyInjection;
 using DiscordBot.Modules.Text.Command;
 using DiscordBot.Text.Command;
-using Microsoft.Extensions.DependencyInjection;
+using DiscordBot.Core;
 
 namespace DiscordBot.Text.Extensions
 {
     public static class DiscordServiceExtensions
     {
-        public static IServiceCollection AddDiscordCommandHandlers(this IServiceCollection services)
+        public static IServiceCollection AddDiscordTextCommandHandlers(this IServiceCollection services)
         {
             services.AddSingleton<IServiceText, PingCommand>();
             services.AddSingleton<IServiceText, HelloWorldCommand>();
+            services.AddSingleton<IServiceText, DotaCommand>();
             return services;
         }
 
