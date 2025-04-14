@@ -9,9 +9,11 @@ namespace DiscordBot.NetworkKit.SteamCommand
     public class DotaDiscordBridge: IDotaDiscordBridge
     {
         private readonly HttpClient _httpClient;
+        private readonly JsonSerializerOptions _jsonSerializerOptions;
         public DotaDiscordBridge(HttpClient httpClient)
         {
             _httpClient = httpClient;
+            _jsonSerializerOptions = new JsonSerializerOptions();
         }
 
         public async Task<bool> GetUserIsWinAsync(long accountId)
@@ -22,10 +24,9 @@ namespace DiscordBot.NetworkKit.SteamCommand
 
                 if (!response.IsSuccessStatusCode) return false;
 
-
                 var content = await response.Content.ReadAsStringAsync();
-                var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-                var matches = JsonSerializer.Deserialize<MatchHistory[]>(content, options);
+                _jsonSerializerOptions.PropertyNameCaseInsensitive = true;
+                var matches = JsonSerializer.Deserialize<MatchHistory[]>(content, _jsonSerializerOptions);
 
                 if (matches == null || matches.Length == 0) return false;
 
@@ -50,12 +51,11 @@ namespace DiscordBot.NetworkKit.SteamCommand
                 if (!response.IsSuccessStatusCode) return null;
 
                 var content = await response.Content.ReadAsStringAsync();
-                var options = new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true,
-                    NumberHandling = JsonNumberHandling.AllowReadingFromString
-                };
-                var ratings = await JsonSerializer.DeserializeAsync<List<Rating>>(await response.Content.ReadAsStreamAsync(), options);
+
+                _jsonSerializerOptions.PropertyNameCaseInsensitive = true;
+                _jsonSerializerOptions.NumberHandling =JsonNumberHandling.AllowReadingFromString;
+
+                var ratings = await JsonSerializer.DeserializeAsync<List<Rating>>(await response.Content.ReadAsStreamAsync(), _jsonSerializerOptions);
                 var latestRating = ratings?.FirstOrDefault();
                 return latestRating?.SoloCompetitiveRank;
             }

@@ -64,14 +64,14 @@ namespace DiscordBot.Host.Service
 
             if (_client.LoginState == LoginState.LoggedIn)
             {
-                await _client.StopAsync().ConfigureAwait(false);
-                await _client.LogoutAsync().ConfigureAwait(false);
+                await _client.StopAsync();
+                await _client.LogoutAsync();
             }
         }
         private async Task OnReadyAsync()
         {
             _logger.LogInformation($"Bot connected as {_client.CurrentUser?.Username}");
-            await _client.SetActivityAsync(new Game("Type !help"));
+            await _client.SetActivityAsync(new Game("Test Bot"));
         }
     }
 }

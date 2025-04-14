@@ -17,7 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DiscordBot.Discord\DiscordBot.Discord.csproj" />
     <ProjectReference Include="..\DiscordBot.NetworkKit\DiscordBot.NetworkKit.csproj" />
-    <ProjectReference Include="..\DiscrodBot.Modules.Text\DiscordBot.Text.csproj" />
+    <ProjectReference Include="..\DiscrodBot.Modules.Text\DiscordBot.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>

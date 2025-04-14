@@ -12,16 +12,9 @@ namespace DiscordBot.Text.Extensions
             services.AddSingleton<IServiceText, PingCommand>();
             services.AddSingleton<IServiceText, HelloWorldCommand>();
             services.AddSingleton<IServiceText, DotaCommand>();
-            return services;
-        }
-
-        /*
-        public static IServiceCollection AddDiscordInfrastructure(this IServiceCollection services)
-        {
             
             return services;
         }
-        */
     }
 
 }

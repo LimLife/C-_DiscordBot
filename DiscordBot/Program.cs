@@ -1,11 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using DiscordBot.Host.ServiceConfigurations;
 using Microsoft.Extensions.Hosting;
 using DiscordBot.Text.Extensions;
-using DiscordBot.Host.Handlers;
-using DiscordBot.Host.Service;
 using DiscordBot.Host.Config;
 using DiscordBot.NetworkKit;
-using DiscordBot.Core;
 using DotNetEnv;
 using Discord;
 
@@ -19,12 +17,8 @@ builder.Services.AddSingleton(new BotConfig
     Intents = GatewayIntents.Guilds | GatewayIntents.GuildMessages | GatewayIntents.MessageContent,
     LogLevel = LogSeverity.Debug
 });
-
-builder.Services.AddSingleton<ICommandMapper, CommandMapper>();
-builder.Services.AddSingleton<MessageHandler>();
-builder.Services.AddSingleton<DiscordBotService>();
-builder.Services.AddSingleton<LogHandler>();
-builder.Services.AddHostedService<DiscordBotService>();
+builder.Services.AddDiscordHandlers();
+builder.Services.AddDiscordServices();
 builder.Services.AddDiscordTextCommandHandlers();
 builder.Services.AddDotaRestClient();
 
