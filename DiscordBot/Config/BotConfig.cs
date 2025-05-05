@@ -7,5 +7,6 @@ namespace DiscordBot.Host.Config
         public string Token { get; set; }
         public GatewayIntents Intents { get; set; }
         public LogSeverity LogLevel { get; set; }
+        public ulong GuildID { get; set; }
     }
 }

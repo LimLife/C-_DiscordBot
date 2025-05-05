@@ -9,17 +9,16 @@ namespace DiscordBot.Host.Handlers
     {
         private readonly ICommandMapper _commandMapper;
         public MessageHandler(ICommandMapper commandMapper) => _commandMapper = commandMapper;
+
         public async Task HandleMessageAsync(SocketMessage message)
         {
             if (message is not SocketUserMessage userMessage || message.Author.IsBot)
                 return;
             string command = message.Content.ToLower();
             var service = _commandMapper.GetServiceForCommand(command);
-            if (service is not null)
-            {
-                var context = new DiscordMessageContext(message);
-                await service.ExecuteAsync(command, context);
-            }
-        }      
+          /*  if (service is not null)
+                await service.ExecuteAsync(command, new DiscordMessageContext(message));
+          */
+        }
     }
 }

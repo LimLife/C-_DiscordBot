@@ -5,8 +5,6 @@ VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscordBot.Host", "DiscordBot.Host.csproj", "{5F3B58ED-7A35-402F-8783-3BBDFB5A30B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscordBot.Application", "..\DiscrodBot.Modules.Text\DiscordBot.Application.csproj", "{3D95A82A-C196-4D59-AF6E-DE5CDABBEF17}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscordBot.Core", "..\DiscordBot.Core\DiscordBot.Core.csproj", "{D4539194-220F-47D0-B828-69691BA14411}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscordBot.Discord", "..\DiscordBot.Discord\DiscordBot.Discord.csproj", "{797C2B05-B352-444A-9C8A-F6329421E58C}"
@@ -14,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscordBot.NetworkKit", "..\DiscordBot.NetworkKit\DiscordBot.NetworkKit.csproj", "{CBEF089F-03AA-4DE8-A1CB-1256B715A306}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscordBot.Infrastructure", "..\DiscordBot.Infrastructure\DiscordBot.Infrastructure.csproj", "{F92C84C5-0816-4436-9094-0689A1DD5AF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscordBot.Application", "..\DiscrodBot.Application\DiscordBot.Application.csproj", "{3A1F5698-6386-8664-522C-CEFB52C81ACA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,10 +25,6 @@ Global
 		{5F3B58ED-7A35-402F-8783-3BBDFB5A30B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F3B58ED-7A35-402F-8783-3BBDFB5A30B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F3B58ED-7A35-402F-8783-3BBDFB5A30B8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3D95A82A-C196-4D59-AF6E-DE5CDABBEF17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3D95A82A-C196-4D59-AF6E-DE5CDABBEF17}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3D95A82A-C196-4D59-AF6E-DE5CDABBEF17}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3D95A82A-C196-4D59-AF6E-DE5CDABBEF17}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D4539194-220F-47D0-B828-69691BA14411}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D4539194-220F-47D0-B828-69691BA14411}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4539194-220F-47D0-B828-69691BA14411}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +41,10 @@ Global
 		{F92C84C5-0816-4436-9094-0689A1DD5AF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F92C84C5-0816-4436-9094-0689A1DD5AF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F92C84C5-0816-4436-9094-0689A1DD5AF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A1F5698-6386-8664-522C-CEFB52C81ACA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A1F5698-6386-8664-522C-CEFB52C81ACA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A1F5698-6386-8664-522C-CEFB52C81ACA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A1F5698-6386-8664-522C-CEFB52C81ACA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

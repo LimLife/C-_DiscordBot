@@ -1,20 +1,18 @@
-﻿using Discord.WebSocket;
+﻿using Discord.Interactions;
 using DiscordBot.Core.Text;
 
 namespace DiscordBot.Discord.MessageContext
 {
-    public class DiscordMessageContext : IMessageContext
+    public class DiscordMessageContext //: InteractionModuleBase<SocketInteractionContext>
     {
-        private readonly SocketMessage _message;
-        public string Content => _message.Content;
+        private IMessageContext _messageContext;
 
-        public ulong ChannelId => _message.Channel.Id;
-
-        public DiscordMessageContext(SocketMessage message) => _message = message;
+        public DiscordMessageContext(IMessageContext messageContext) => _messageContext = messageContext;
 
         public async Task ReplyAsync(string message)
         {
-            await _message.Channel.SendMessageAsync(message);
+            await ReplyAsync(message);
+            // await _message.Channel.SendMessageAsync(message);
         }
     }
 }
