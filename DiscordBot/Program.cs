@@ -4,11 +4,13 @@ using Microsoft.Extensions.Hosting;
 using DiscordBot.Text.Extensions;
 using DiscordBot.Host.Config;
 using DiscordBot.NetworkKit;
+using Discord.Interactions;
 using DiscordBot.Discord;
 using Discord.WebSocket;
 using Discord.Commands;
 using DotNetEnv;
 using Discord;
+
 
 
 Env.TraversePath().Load();
@@ -22,9 +24,23 @@ builder.Services.AddSingleton(new BotConfig
     LogLevel = LogSeverity.Debug,
 });
 
-builder.Services.AddSingleton<DiscordSocketClient>();
 builder.Services.AddSingleton<CommandService>();
 //test Area
+builder.Services.AddSingleton(provider =>
+{
+    var config = provider.GetRequiredService<BotConfig>();
+    return new DiscordSocketClient(new DiscordSocketConfig
+    {
+        GatewayIntents = config.Intents,
+        LogLevel = config.LogLevel,
+        UseInteractionSnowflakeDate = false
+    });
+}).AddSingleton(provider =>
+{
+    var client = provider.GetRequiredService<DiscordSocketClient>();
+    return new InteractionService(client);
+});
+
 //End Test
 
 #region Application services

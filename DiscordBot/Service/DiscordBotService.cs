@@ -1,12 +1,12 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using DiscordBot.Discord.AdapterCommand;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using DiscordBot.Host.Handlers;
 using DiscordBot.Host.Config;
 using Discord.Interactions;
-using System.Reflection;
 using Discord.WebSocket;
 using Discord;
-using DiscordBot.Discord.AdapterContext;
+
 
 
 namespace DiscordBot.Host.Service
@@ -18,22 +18,15 @@ namespace DiscordBot.Host.Service
         private readonly LogHandler _logHandler;
         private readonly BotConfig _config;
         private readonly DiscordSocketClient _client;
-        private InteractionService _interactionService;
-        public DiscordBotService(ILogger<DiscordBotService> logger, IServiceProvider services, LogHandler logHandler, BotConfig config)
+        private readonly InteractionService _interactionService;
+        public DiscordBotService(ILogger<DiscordBotService> logger, IServiceProvider services, LogHandler logHandler, BotConfig config, DiscordSocketClient client, InteractionService interactionService)
         {
             _logger = logger;
             _services = services;
             _logHandler = logHandler;
             _config = config;
-
-            _client = new DiscordSocketClient(new DiscordSocketConfig
-            {
-                GatewayIntents = _config.Intents,
-                LogLevel = _config.LogLevel,
-                UseInteractionSnowflakeDate = false
-            });
-
-            _interactionService = new InteractionService(_client);
+            _client = client;
+            _interactionService = interactionService;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -103,7 +96,8 @@ namespace DiscordBot.Host.Service
             _logger.LogInformation($"Bot connected as {_client.CurrentUser?.Username}");
 
             await _client.SetActivityAsync(new Game("Test Bot"));
-            await _interactionService.AddModulesAsync(typeof(PingAdapterContext).Assembly, _services);
+            await _interactionService.AddModulesAsync(typeof(PingAdapter).Assembly, _services);
+           
             await _interactionService.RegisterCommandsToGuildAsync(_config.GuildID, true);
         }
 
