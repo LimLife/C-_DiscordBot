@@ -15,7 +15,7 @@
 [Oo]bj/
 out/
 build/
-
+DiscrodBot.Modules.Text
 
 *.nupkg
 packages/

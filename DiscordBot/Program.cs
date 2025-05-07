@@ -25,7 +25,6 @@ builder.Services.AddSingleton(new BotConfig
 });
 
 builder.Services.AddSingleton<CommandService>();
-//test Area
 builder.Services.AddSingleton(provider =>
 {
     var config = provider.GetRequiredService<BotConfig>();
@@ -40,6 +39,7 @@ builder.Services.AddSingleton(provider =>
     var client = provider.GetRequiredService<DiscordSocketClient>();
     return new InteractionService(client);
 });
+//test Area
 
 //End Test
 

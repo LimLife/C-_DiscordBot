@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using DiscordBot.Discord.AdapterContext;
+using DiscordBot.Discord.AdapterCommand;
 
 namespace DiscordBot.Discord
 {
@@ -15,12 +15,14 @@ namespace DiscordBot.Discord
         /// <remarks>
         /// Реализованные команды:
         /// <list type="bullet">
-        ///   <item><see cref="PingAdapterContext"/> → <see cref="IPingCommand"/></item>
+        ///   <item><see cref="PingAdapter"/> → <see cref="IPingCommand"/></item>
+        ///   <item><see cref="HelperAdapter"/> → <see cref="IHelper"/></item>
         /// </list>
         /// </remarks>
         public static IServiceCollection AddDiscordCommand(this IServiceCollection services)
         {
-            services.AddSingleton<PingAdapterContext>();
+            services.AddSingleton<PingAdapter>();
+            services.AddSingleton<HelperAdapter>();
             return services;
         }
     }

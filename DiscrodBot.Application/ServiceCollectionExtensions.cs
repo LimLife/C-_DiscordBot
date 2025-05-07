@@ -1,8 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using DiscordBot.Modules.Text.Command;
+using DiscordBot.Application.Command;
+using DiscordBot.Core.Commands;
 using DiscordBot.Text.Command;
 using DiscordBot.Core;
-using DiscordBot.Modules.Text.Command;
-using DiscordBot.Core.Text;
 
 namespace DiscordBot.Text.Extensions
 {
@@ -20,6 +21,7 @@ namespace DiscordBot.Text.Extensions
         ///   <item><see cref="IPingCommand"/> → <see cref="PingCommand"/></item>
         ///   <item><see cref="IServiceText"/> → <see cref="HelloWorldCommand"/></item>
         ///   <item><see cref="IServiceText"/> → <see cref="DotaCommand"/></item>
+        ///   <item><see cref="IHelperCommand"/> → <see cref="Helper"/></item>
         /// </list>
         /// </remarks>
         public static IServiceCollection AddDiscordTextCommandHandlers(this IServiceCollection services)
@@ -27,6 +29,7 @@ namespace DiscordBot.Text.Extensions
             services.AddSingleton<IPingCommand, PingCommand>();
            // services.AddSingleton<IServiceText, HelloWorldCommand>();
            // services.AddSingleton<IServiceText, DotaCommand>();
+            services.AddSingleton<IHelperCommand, Helper>();
             
             return services;
         }
