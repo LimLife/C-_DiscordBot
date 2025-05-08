@@ -1,7 +1,10 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using DiscordBot.Infrastructure.Persistence.DBContext;
+using Microsoft.Extensions.DependencyInjection;
 using DiscordBot.Host.ServiceConfigurations;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using DiscordBot.Text.Extensions;
+using DiscordBot.Infrastructure;
 using DiscordBot.Host.Config;
 using DiscordBot.NetworkKit;
 using Discord.Interactions;
@@ -13,9 +16,10 @@ using Discord;
 
 
 
-Env.TraversePath().Load();
+Env.TraversePath().Load(".env.dev");
 
 var builder = new HostApplicationBuilder(args);
+
 builder.Services.AddSingleton(new BotConfig
 {
     Token = Env.GetString("DISCORD_TOKEN") ?? throw new ArgumentNullException("DISCORD_TOKEN is not configured"),
@@ -23,7 +27,22 @@ builder.Services.AddSingleton(new BotConfig
     Intents = GatewayIntents.Guilds | GatewayIntents.GuildMessages | GatewayIntents.MessageContent,
     LogLevel = LogSeverity.Debug,
 });
+builder.Services.AddSingleton(new DataBaseConfig
+{
+    Host = Env.GetString("DB_HOST") ?? "test-host",
+    DBName = Env.GetString("DB_NAME") ?? "test-userName",
+    Password = Env.GetString("DB_PASSWORD") ?? "test-pass",
+    Port = Env.GetString("DB_PORT") ?? "test-port",
+    UserName = Env.GetString("DB_USERNAME") ?? "test-userName"
 
+});
+#region Infrastructure
+builder.Services.AddPersistence(provider =>
+{
+    var config = provider.GetRequiredService<DataBaseConfig>();
+    return config.GetConnectionString();
+});
+#endregion
 builder.Services.AddSingleton<CommandService>();
 builder.Services.AddSingleton(provider =>
 {
@@ -39,9 +58,6 @@ builder.Services.AddSingleton(provider =>
     var client = provider.GetRequiredService<DiscordSocketClient>();
     return new InteractionService(client);
 });
-//test Area
-
-//End Test
 
 #region Application services
 builder.Services.AddDiscordTextCommandHandlers();
@@ -51,13 +67,19 @@ builder.Services.AddDiscordTextCommandHandlers();
 builder.Services.AddDiscordCommand();
 #endregion
 
-builder.Services.AddDiscordHandlers();
+
+
+#region NetworkKit
 builder.Services.AddDotaRestClient();
+#endregion
 
-
-
-
+builder.Services.AddDiscordHandlers();
 builder.Services.AddDiscordServices();
 
 var app = builder.Build();
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDBContext>();
+    db.Database.Migrate();
+}
 await app.RunAsync();
