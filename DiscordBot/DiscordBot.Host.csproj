@@ -9,9 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="DotNetEnv" Version="3.1.1" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.3" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.3" />
-    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="9.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.4" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,11 +17,11 @@
     <ProjectReference Include="..\DiscordBot.Infrastructure\DiscordBot.Infrastructure.csproj" />
     <ProjectReference Include="..\DiscordBot.NetworkKit\DiscordBot.NetworkKit.csproj" />
     <ProjectReference Include="..\DiscrodBot.Application\DiscordBot.Application.csproj" />
-    <ProjectReference Include="..\DiscrodBot.Modules.Text\DiscordBot.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Helper\" />
+    <Folder Include="Tools\MigrationsBundles\" />
   </ItemGroup>
 
 </Project>

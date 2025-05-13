@@ -48,7 +48,7 @@ nuget.config
 
 
 .dotnet/
-tools/
+
 
 
 *.jfm

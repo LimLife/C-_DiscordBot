@@ -37,11 +37,7 @@ builder.Services.AddSingleton(new DataBaseConfig
 
 });
 #region Infrastructure
-builder.Services.AddPersistence(provider =>
-{
-    var config = provider.GetRequiredService<DataBaseConfig>();
-    return config.GetConnectionString();
-});
+builder.Services.AddPersistenceDev(provider => provider.GetRequiredService<DataBaseConfig>().GetConnectionString());
 #endregion
 builder.Services.AddSingleton<CommandService>();
 builder.Services.AddSingleton(provider =>
@@ -77,9 +73,5 @@ builder.Services.AddDiscordHandlers();
 builder.Services.AddDiscordServices();
 
 var app = builder.Build();
-using (var scope = app.Services.CreateScope())
-{
-    var db = scope.ServiceProvider.GetRequiredService<AppDBContext>();
-    db.Database.Migrate();
-}
+
 await app.RunAsync();

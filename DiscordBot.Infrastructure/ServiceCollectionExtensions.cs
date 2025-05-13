@@ -11,7 +11,15 @@ namespace DiscordBot.Infrastructure
         {
             services.AddDbContext<AppDBContext>((provider, options) =>
             {
-                options.UseNpgsql(connectionString(provider)).EnableSensitiveDataLogging().LogTo(Console.WriteLine,LogLevel.Information);
+                options.UseNpgsql(connectionString(provider));
+            });
+            return services;
+        }
+        public static IServiceCollection AddPersistenceDev(this IServiceCollection services, Func<IServiceProvider, string> connectionString)
+        {
+            services.AddDbContext<AppDBContext>((provider, options) =>
+            {
+                options.UseNpgsql(connectionString(provider)).EnableSensitiveDataLogging().LogTo(Console.WriteLine, LogLevel.Information);
             });
             return services;
         }
