@@ -14,15 +14,6 @@ source "$SCRIPT_DIR/L-utils.sh"
 
 read_config
 
-if [ -z "${INFRASTRUCTURE_PROJECT_NAME:-}" ]; then
-  echo "❌ Не определена переменная INFRASTRUCTURE_PROJECT_NAME в конфиге"
-  exit 1
-fi
-
-if [ -z "${STARTUP_PROJECT_NAME:-}" ]; then
-  echo "❌ Не определена переменная STARTUP_PROJECT_NAME в конфиге"
-  exit 1
-fi
 
 ROOT_DIR="$(get_root_dir)"
 BUNDLE_PATH="$SCRIPT_DIR/../MigrationsBundles/$BUNDLE_NAME"

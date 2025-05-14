@@ -1,25 +1,24 @@
 ﻿#!/bin/bash
 
-set -e
+set -euo pipefail
 
 MIGRATION_NAME=$1
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-INFRA_PROJECT="$SCRIPT_DIR/../../../DiscordBot.Infrastructure/DiscordBot.Infrastructure.csproj"
-STARTUP_PROJECT="$SCRIPT_DIR/../../DiscordBot.Host.csproj"
 
-if [ -z "$MIGRATION_NAME" ]; then
-  echo "❌ Не указано имя миграции."
+if [ ! -f "$SCRIPT_DIR/L-utils.sh" ]; then
+  echo "❌ Файл утилит не найден: $SCRIPT_DIR/L-utils.sh"
   exit 1
 fi
 
-if [ ! -f "$STARTUP_PROJECT" ]; then
-  echo "❌ Не найден проект: $STARTUP_PROJECT"
-  exit 1
-fi
-if [ ! -f "$INFRA_PROJECT" ]; then
-  echo "❌ Не найден проект: $INFRA_PROJECT"
-  exit 1
-fi
+source "$SCRIPT_DIR/L-utils.sh"
+
+read_config
+
+
+ROOT_DIR="$(get_root_dir)"
+
+INFRASTRUCTURE_PROJECT="$(find_project_path "$INFRASTRUCTURE_PROJECT_NAME" "$ROOT_DIR")"
+STARTUP_PROJECT="$(find_project_path "$STARTUP_PROJECT_NAME" "$ROOT_DIR")"
 
 echo "ℹ️ Создание миграции: $MIGRATION_NAME"
 dotnet ef migrations add "$MIGRATION_NAME" \
