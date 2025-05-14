@@ -1,0 +1,2 @@
+INFRASTRUCTURE_PROJECT_NAME=DiscordBot.Infrastructure.csproj
+STARTUP_PROJECT_NAME=DiscordBot.Host.csproj
