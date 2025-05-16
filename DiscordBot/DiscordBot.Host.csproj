@@ -21,7 +21,6 @@
 
   <ItemGroup>
     <Folder Include="Helper\" />
-    <Folder Include="Tools\MigrationsBundles\" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿#!/bin/bash
+#!/bin/bash
 
 set -euo pipefail
 
@@ -20,11 +20,11 @@ INFRASTRUCTURE_PROJECT="$(find_project_path "$INFRASTRUCTURE_PROJECT_NAME" "$ROO
 STARTUP_PROJECT="$(find_project_path "$STARTUP_PROJECT_NAME" "$ROOT_DIR")"
 
 echo "ℹ️ Применение миграций..."
-dotnet ef database update --project "$INFRASTRUCTURE_PROJECT" --startup-project "$STARTUP_PROJECT"
 
-if [ $? -eq 0 ]; then
-  echo "✅ Миграции успешно применены"
-else
-  echo "❌ Ошибка при применении миграций"
+if ! OUTPUT=$(dotnet ef database update --project "$INFRASTRUCTURE_PROJECT" --startup-project "$STARTUP_PROJECT" 2>&1); then
+  echo "❌ Ошибка при применении миграций:"
+  echo "$OUTPUT"
   exit 1
+else
+  echo "✅ Миграции успешно применены"
 fi

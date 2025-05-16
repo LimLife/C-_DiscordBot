@@ -7,8 +7,7 @@ if [[ $# -lt 1 ]]; then
   exit 1
 fi
 
-RAW_NAME="$1"
-MIGRATION_NAME=$(echo "$RAW_NAME" | tr '[:upper:]' '[:lower:]' | tr ' ' '_' | tr '-' '_')
+MIGRATION_ID="$1"
 
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -27,23 +26,19 @@ ROOT_DIR="$(get_root_dir)"
 
 INFRASTRUCTURE_PROJECT="$(find_project_path "$INFRASTRUCTURE_PROJECT_NAME" "$ROOT_DIR")"
 STARTUP_PROJECT="$(find_project_path "$STARTUP_PROJECT_NAME" "$ROOT_DIR")"
-
-
 INFRASTRUCTURE_DIR="$(dirname "$INFRASTRUCTURE_PROJECT")"
 
-if check_duplicate_migration_name "$MIGRATION_NAME" "$INFRASTRUCTURE_DIR"; then
-  echo "🚫 Миграция не будет создана есть дубликат $MIGRATION_NAME ."
+if ! check_exist_migration_name "$MIGRATION_ID" "$INFRASTRUCTURE_DIR"; then
   exit 1
-fi
+fi 
 
-echo "ℹ️ Создание миграции: $MIGRATION_NAME"
-dotnet ef migrations add "$MIGRATION_NAME" \
+if ! OUTPUT=$(dotnet ef database update "$MIGRATION_ID" \
   --project "$INFRASTRUCTURE_PROJECT" \
-  --startup-project "$STARTUP_PROJECT"
-
-if [ $? -eq 0 ]; then
-  echo "✅ Миграция успешно создана: $MIGRATION_NAME"
-else
-  echo "❌ Ошибка при создании миграции."
+  --startup-project "$STARTUP_PROJECT" 2>&1); then
+  echo -e "\e[31m❌ Ошибка при применении миграции с ID $MIGRATION_ID:\e[0m"
+  echo "$OUTPUT"
   exit 1
+else
+  echo -e "\e[32m✅ Миграция с ID $MIGRATION_ID успешно применена:\e[0m"
+  echo "$OUTPUT"
 fi

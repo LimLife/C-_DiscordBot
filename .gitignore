@@ -1,4 +1,6 @@
 
+#Scripts
+*.ps1
 .env
 *.env.local
 .env.*.local

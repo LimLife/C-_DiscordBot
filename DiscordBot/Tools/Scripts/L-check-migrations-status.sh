@@ -1,4 +1,4 @@
-﻿#!/bin/bash
+#!/bin/bash
 
 set -euo pipefail
 
@@ -19,12 +19,14 @@ ROOT_DIR="$(get_root_dir)"
 INFRASTRUCTURE_PROJECT="$(find_project_path "$INFRASTRUCTURE_PROJECT_NAME" "$ROOT_DIR")"
 STARTUP_PROJECT="$(find_project_path "$STARTUP_PROJECT_NAME" "$ROOT_DIR")"
 
-echo "ℹ️ Проверка состояния миграций..."
-dotnet ef migrations list --project "$INFRASTRUCTURE_PROJECT" --startup-project "$STARTUP_PROJECT"
+echo "ℹ️ Проверка списка миграций..."
 
-if [ $? -eq 0 ]; then
-  echo "✅ Миграции успешно проверены"
-else
-  echo "❌ Ошибка при проверке миграций"
+if ! OUTPUT=$(dotnet ef migrations list --project "$INFRASTRUCTURE_PROJECT" --startup-project "$STARTUP_PROJECT" 2>&1); then
+  echo -e "\e[31m❌ Ошибка при проверке миграций:\e[0m"
+  echo "$OUTPUT"
   exit 1
+else
+  echo -e "\e[32m✅ Миграции успешно проверены:\e[0m"
+  echo "$OUTPUT"
 fi
+

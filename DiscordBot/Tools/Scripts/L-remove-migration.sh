@@ -1,4 +1,4 @@
-﻿#!/bin/bash
+#!/bin/bash
 
 set -euo pipefail
 
@@ -25,13 +25,14 @@ if [ ! -f "$INFRASTRUCTURE_PROJECT" ]; then
   echo "❌ Не найден проект: $INFRASTRUCTURE_PROJECT"
   exit 1
 fi
-
 echo "ℹ️ Удаление последней миграции..."
-dotnet ef migrations remove --project "$INFRASTRUCTURE_PROJECT"
 
-if [ $? -eq 0 ]; then
-  echo "✅ Последняя миграция успешно удалена"
-else
-  echo "❌ Ошибка при удалении миграции"
+
+if ! OUTPUT=$(dotnet ef migrations remove --project "$INFRASTRUCTURE_PROJECT" 2>&1); then
+  echo -e "\e[31m❌ Ошибка при удалении миграции:\e[0m"
+  echo "$OUTPUT"
   exit 1
+else
+  echo -e "\e[32m✅ Последняя миграция успешно удалена:\e[0m"
+  echo "$OUTPUT"
 fi
